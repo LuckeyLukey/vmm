@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${student.lastName+' '+student.firstName}"></title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="grade: ${student.grades}">
+                <td th:text="${grade.assignedDate}"></td>
+                <td th:text="${grade.subject}"></td>
+                <td th:text="${grade.gradeValue}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h1>New Record</h1>
+    <form th:object="${newGrade}" method="post" th:action="@{/th/grades/{id} (id=${student.id})}">
+        Subject: <select th:field="*{subject}">
+            <option th:each="possibleSubject: ${possibleSubjects}" th:text="${possibleSubject}" th:value="${possibleSubject}"></option>
+        </select>
+        <br>
+        Grade: <nobr th:each="possibleGrade: ${possibleGrades}">
+        <input type="radio" th:field="*{gradeValue}" th:value="${possibleGrade}">
+        <label th:for="${possibleGrade}" th:text="${possibleGrade}"/>
+        </nobr>
+        <br>
+        <input type="date" th:field="*{assignedDate}">
+        <br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

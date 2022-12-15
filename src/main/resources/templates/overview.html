@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student: ${students}">
+                <td th:text="${student.lastName+' '+student.firstName}"></td>
+                <td><a th:text="${student.grades.size()}" th:href="@{/th/grades/{id} (id=${student.id})}"></a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
